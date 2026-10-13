@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Countries of the World - Los países del mundo</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--b1:#6a4cff;--b2:#ff5fa2;--b3:#ffb703;--card:#fff;--ink:#2a1f5c;--mut:#6b6396;--ok:#12b886;--bad:#ff4d6d}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--card:#2e2468;--ink:#fff;--mut:#cfc8ff}}
+:root[data-theme="dark"]{--card:#2e2468;--ink:#fff;--mut:#cfc8ff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;color:#fff;background:linear-gradient(135deg,var(--b1),var(--b2),var(--b3),var(--b1));background-size:300% 300%;animation:bg 14s ease infinite;min-height:100vh}
+@keyframes bg{50%{background-position:100% 50%}}
+.fl{position:fixed;bottom:-3rem;opacity:.35;z-index:0;pointer-events:none;animation:up linear infinite}
+@keyframes up{to{transform:translateY(-115vh) rotate(40deg)}}
+header,nav,main{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:0 14px}
+header{text-align:center;padding-top:14px}
+h1{margin:0;font-size:clamp(1.8rem,6vw,3rem);text-shadow:0 4px 0 rgba(0,0,0,.2);animation:pop 2.5s ease-in-out infinite}
+@keyframes pop{50%{transform:scale(1.04) rotate(-1deg)}}
+header p{margin:4px 0 10px;font-size:1.1rem}
+.top{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+#pts{background:#ffe066;color:#2a1f5c;font-weight:800;padding:8px 16px;border-radius:30px}
+#pts.bump{animation:bump .5s}
+@keyframes bump{50%{transform:scale(1.4)}}
+button{font:inherit;cursor:pointer;border:0;border-radius:30px;padding:10px 16px;font-weight:700;transition:transform .15s}
+button:hover:not(:disabled){transform:translateY(-3px) scale(1.04)}
+button:disabled{cursor:default;opacity:.85}
+#spd{background:#fff;color:#2a1f5c}
+nav{display:flex;gap:8px;justify-content:center;margin:12px auto;flex-wrap:wrap}
+nav button{background:rgba(255,255,255,.25);color:#fff;font-size:1.05rem}
+nav button.on{background:#fff;color:#6a4cff}
+section{background:var(--card);color:var(--ink);border-radius:26px;padding:18px;margin-bottom:24px;box-shadow:0 10px 30px rgba(0,0,0,.25);animation:in .5s}
+@keyframes in{from{opacity:0;transform:translateY(20px)}}
+h2{margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.card{border:4px solid var(--c,#6a4cff);border-radius:20px;padding:12px;text-align:center;animation:in .4s;background:var(--card)}
+.card b{display:block;font-size:1.2rem}
+.card small,.mut{color:var(--mut)}
+.card div{margin:6px 0}
+.sp{background:var(--c,#6a4cff);color:#fff;margin:3px;padding:7px 12px;font-size:.9rem}
+.chip{background:#eee9ff;color:#2a1f5c;margin:3px}
+.chip.on{background:#6a4cff;color:#fff}
+.vocab{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
+.vocab button{background:#ffe066;color:#2a1f5c;font-size:1rem}
+.tip{background:#e7fff6;color:#0b5c45;border-radius:16px;padding:10px 14px;margin:10px 0}
+input[type=text]{width:100%;padding:12px 16px;border-radius:16px;border:3px solid #6a4cff;font:inherit;font-size:1.1rem;background:#fff;color:#2a1f5c;margin:8px 0}
+input:focus{outline:4px solid #ffe066}
+select{padding:10px;border-radius:14px;border:3px solid #6a4cff;font:inherit;background:#fff;color:#2a1f5c}
+.hubs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px}
+.gm{background:linear-gradient(135deg,#6a4cff,#ff5fa2);color:#fff;border-radius:22px;padding:16px;font-size:1.15rem}
+.gm small{display:block;font-weight:400;margin-top:4px}
+.gm:nth-child(2n){background:linear-gradient(135deg,#06d6a0,#2ec4ff)}
+.gm:nth-child(3n){background:linear-gradient(135deg,#ff9f1c,#ef476f)}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-weight:800}
+.mini{background:#eee9ff;color:#2a1f5c;padding:7px 14px}
+.q{font-size:1.4rem;margin:16px 0;font-weight:700}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.op{background:#eee9ff;color:#2a1f5c;border:3px solid #6a4cff;border-radius:18px;font-size:1.1rem;padding:14px}
+.op small{display:block;font-weight:400}
+.op.good{background:var(--ok);color:#fff;border-color:var(--ok);animation:bump .6s}
+.op.bad{background:var(--bad);color:#fff;border-color:var(--bad);animation:shk .4s}
+.big{background:#6a4cff;color:#fff;font-size:1.1rem;margin:8px 4px}
+.fb{min-height:2rem;font-size:1.2rem;font-weight:700;margin:10px 0}
+.fb.ok{color:var(--ok)}.fb.no{color:var(--bad)}
+.shk{animation:shk .4s}
+@keyframes shk{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.cf{position:fixed;top:-2rem;font-size:1.7rem;pointer-events:none;z-index:50;animation:fall 2s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+#ts{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#2a1f5c;color:#fff;padding:12px 20px;border-radius:20px;z-index:60;max-width:90%;text-align:center}
+[hidden]{display:none!important}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<header>
+<h1>🌎 Countries of the World! 🌍</h1>
+<p>¡Aprende los países del mundo en inglés y diviértete jugando!</p>
+<div class="top"><span id="pts">⭐ 0</span><button id="spd">🐢 Voz lenta: NO</button></div>
+</header>
+<nav><button data-t="learn" class="on">📚 Aprende</button><button data-t="explore">🗺️ Explora</button><button data-t="games">🎮 Juega</button></nav>
+<main>
+<section id="learn">
+<h2>👋 ¡Bienvenido, explorador!</h2>
+<p>Hoy vas a viajar por todo el mundo sin salir de casa. Aprenderás cómo se dicen en inglés los <b>195 países</b>, sus <b>capitales</b> y los <b>continentes</b>. ¡Y podrás escuchar cada palabra con pronunciación de inglés americano!</p>
+<div class="tip">🔊 <b>Truco:</b> toca cualquier botón con este símbolo para escuchar la palabra. Si quieres oírla más despacio, activa la <b>Voz lenta</b> arriba.</div>
+<h3>🔤 Palabras mágicas</h3>
+<div class="vocab">
+<button data-say="Country">Country = país 🔊</button>
+<button data-say="Capital">Capital = capital 🔊</button>
+<button data-say="Continent">Continent = continente 🔊</button>
+<button data-say="World">World = mundo 🔊</button>
+<button data-say="Map">Map = mapa 🔊</button>
+</div>
+<h3>🌐 Los 7 continentes</h3>
+<p class="mut">Escucha cada nombre y toca «Ver países» para conocer los países de ese continente.</p>
+<div class="grid" id="conts"></div>
+<h3>🚀 ¿Cómo aprender mejor?</h3>
+<p>1️⃣ Ve a <b>Explora</b> y escucha los países. 2️⃣ Repítelos en voz alta. 3️⃣ Ve a <b>Juega</b> para practicar. ¡Cada acierto a la primera te da una ⭐!</p>
+</section>
+
+<section id="explore" hidden>
+<h2>🗺️ Explora los países</h2>
+<p>Toca <b>🔊 País</b> para escuchar el nombre del país y <b>🔊 Capital</b> para escuchar su capital. Debajo de cada país verás cómo se dice en español.</p>
+<div id="chips"></div>
+<input type="text" id="q" placeholder="🔍 Busca un país o una capital..." autocomplete="off" autocapitalize="off" spellcheck="false">
+<p id="hd"></p>
+<div class="grid" id="list"></div>
+</section>
+
+<section id="games" hidden>
+<div id="hub">
+<h2>🎮 ¡Hora de jugar!</h2>
+<p>Los juegos no tienen límite: ¡juega todo el tiempo que quieras! Elige dónde quieres practicar:</p>
+<select id="gf"></select>
+<div class="hubs">
+<button class="gm" data-g="cap">🏙️ Capitales<small>Elige la capital correcta</small></button>
+<button class="gm" data-g="lis">👂 Escucha y elige<small>Oye el país y elige su nombre</small></button>
+<button class="gm" data-g="con">🧭 ¿Qué continente?<small>Ubica cada país en su continente</small></button>
+<button class="gm" data-g="wc">✏️ Escribe el país<small>Escribe en inglés el nombre del país</small></button>
+<button class="gm" data-g="wk">📝 Escribe la capital<small>Escribe en inglés la capital</small></button>
+</div>
+<div class="tip">💡 Si te equivocas, ¡no pasa nada! Puedes intentarlo otra vez. Solo ganas ⭐ si aciertas a la primera.</div>
+</div>
+<div id="ga" hidden></div>
+</section>
+</main>
+<div id="ts" hidden></div>
+<script>
+const CO={Africa:['África','🌍','#ff9f1c'],Antarctica:['Antártida','🐧','#2ec4ff'],Asia:['Asia','🐼','#ef476f'],Europe:['Europa','🏰','#6a4cff'],'North America':['América del Norte','🦅','#06d6a0'],Oceania:['Oceanía','🦘','#ff5fa2'],'South America':['América del Sur','🦙','#e6a800']};
+const RAW={
+Africa:"Algeria|Argelia|Algiers;Angola|Angola|Luanda;Benin|Benín|Porto-Novo;Botswana|Botsuana|Gaborone;Burkina Faso|Burkina Faso|Ouagadougou;Burundi|Burundi|Gitega;Cabo Verde|Cabo Verde|Praia;Cameroon|Camerún|Yaoundé;Central African Republic|República Centroafricana|Bangui;Chad|Chad|N'Djamena;Comoros|Comoras|Moroni;Republic of the Congo|República del Congo|Brazzaville;Democratic Republic of the Congo|República Democrática del Congo|Kinshasa;Ivory Coast|Costa de Marfil|Yamoussoukro;Djibouti|Yibuti|Djibouti;Egypt|Egipto|Cairo;Equatorial Guinea|Guinea Ecuatorial|Malabo;Eritrea|Eritrea|Asmara;Eswatini|Esuatini|Mbabane;Ethiopia|Etiopía|Addis Ababa;Gabon|Gabón|Libreville;Gambia|Gambia|Banjul;Ghana|Ghana|Accra;Guinea|Guinea|Conakry;Guinea-Bissau|Guinea-Bisáu|Bissau;Kenya|Kenia|Nairobi;Lesotho|Lesoto|Maseru;Liberia|Liberia|Monrovia;Libya|Libia|Tripoli;Madagascar|Madagascar|Antananarivo;Malawi|Malaui|Lilongwe;Mali|Malí|Bamako;Mauritania|Mauritania|Nouakchott;Mauritius|Mauricio|Port Louis;Morocco|Marruecos|Rabat;Mozambique|Mozambique|Maputo;Namibia|Namibia|Windhoek;Niger|Níger|Niamey;Nigeria|Nigeria|Abuja;Rwanda|Ruanda|Kigali;Sao Tome and Principe|Santo Tomé y Príncipe|São Tomé;Senegal|Senegal|Dakar;Seychelles|Seychelles|Victoria;Sierra Leone|Sierra Leona|Freetown;Somalia|Somalia|Mogadishu;South Africa|Sudáfrica|Pretoria;South Sudan|Sudán del Sur|Juba;Sudan|Sudán|Khartoum;Tanzania|Tanzania|Dodoma;Togo|Togo|Lomé;Tunisia|Túnez|Tunis;Uganda|Uganda|Kampala;Zambia|Zambia|Lusaka;Zimbabwe|Zimbabue|Harare",
+Asia:"Afghanistan|Afganistán|Kabul;Armenia|Armenia|Yerevan;Azerbaijan|Azerbaiyán|Baku;Bahrain|Baréin|Manama;Bangladesh|Bangladés|Dhaka;Bhutan|Bután|Thimphu;Brunei|Brunéi|Bandar Seri Begawan;Cambodia|Camboya|Phnom Penh;China|China|Beijing;Cyprus|Chipre|Nicosia;Georgia|Georgia|Tbilisi;India|India|New Delhi;Indonesia|Indonesia|Jakarta;Iran|Irán|Tehran;Iraq|Irak|Baghdad;Israel|Israel|Jerusalem;Japan|Japón|Tokyo;Jordan|Jordania|Amman;Kazakhstan|Kazajistán|Astana;Kuwait|Kuwait|Kuwait City;Kyrgyzstan|Kirguistán|Bishkek;Laos|Laos|Vientiane;Lebanon|Líbano|Beirut;Malaysia|Malasia|Kuala Lumpur;Maldives|Maldivas|Malé;Mongolia|Mongolia|Ulaanbaatar;Myanmar|Myanmar|Naypyidaw;Nepal|Nepal|Kathmandu;North Korea|Corea del Norte|Pyongyang;Oman|Omán|Muscat;Pakistan|Pakistán|Islamabad;Philippines|Filipinas|Manila;Qatar|Catar|Doha;Saudi Arabia|Arabia Saudita|Riyadh;Singapore|Singapur|Singapore;South Korea|Corea del Sur|Seoul;Sri Lanka|Sri Lanka|Colombo;Syria|Siria|Damascus;Tajikistan|Tayikistán|Dushanbe;Thailand|Tailandia|Bangkok;Timor-Leste|Timor Oriental|Dili;Turkey|Turquía|Ankara;Turkmenistan|Turkmenistán|Ashgabat;United Arab Emirates|Emiratos Árabes Unidos|Abu Dhabi;Uzbekistan|Uzbekistán|Tashkent;Vietnam|Vietnam|Hanoi;Yemen|Yemen|Sana'a;Palestine|Palestina|Ramallah",
+Europe:"Albania|Albania|Tirana;Andorra|Andorra|Andorra la Vella;Austria|Austria|Vienna;Belarus|Bielorrusia|Minsk;Belgium|Bélgica|Brussels;Bosnia and Herzegovina|Bosnia y Herzegovina|Sarajevo;Bulgaria|Bulgaria|Sofia;Croatia|Croacia|Zagreb;Czech Republic|República Checa|Prague;Denmark|Dinamarca|Copenhagen;Estonia|Estonia|Tallinn;Finland|Finlandia|Helsinki;France|Francia|Paris;Germany|Alemania|Berlin;Greece|Grecia|Athens;Hungary|Hungría|Budapest;Iceland|Islandia|Reykjavik;Ireland|Irlanda|Dublin;Italy|Italia|Rome;Latvia|Letonia|Riga;Liechtenstein|Liechtenstein|Vaduz;Lithuania|Lituania|Vilnius;Luxembourg|Luxemburgo|Luxembourg;Malta|Malta|Valletta;Moldova|Moldavia|Chisinau;Monaco|Mónaco|Monaco;Montenegro|Montenegro|Podgorica;Netherlands|Países Bajos|Amsterdam;North Macedonia|Macedonia del Norte|Skopje;Norway|Noruega|Oslo;Poland|Polonia|Warsaw;Portugal|Portugal|Lisbon;Romania|Rumania|Bucharest;Russia|Rusia|Moscow;San Marino|San Marino|San Marino;Serbia|Serbia|Belgrade;Slovakia|Eslovaquia|Bratislava;Slovenia|Eslovenia|Ljubljana;Spain|España|Madrid;Sweden|Suecia|Stockholm;Switzerland|Suiza|Bern;Ukraine|Ucrania|Kyiv;United Kingdom|Reino Unido|London;Vatican City|Ciudad del Vaticano|Vatican City",
+'North America':"Antigua and Barbuda|Antigua y Barbuda|Saint John's;Bahamas|Bahamas|Nassau;Barbados|Barbados|Bridgetown;Belize|Belice|Belmopan;Canada|Canadá|Ottawa;Costa Rica|Costa Rica|San José;Cuba|Cuba|Havana;Dominica|Dominica|Roseau;Dominican Republic|República Dominicana|Santo Domingo;El Salvador|El Salvador|San Salvador;Grenada|Granada|Saint George's;Guatemala|Guatemala|Guatemala City;Haiti|Haití|Port-au-Prince;Honduras|Honduras|Tegucigalpa;Jamaica|Jamaica|Kingston;Mexico|México|Mexico City;Nicaragua|Nicaragua|Managua;Panama|Panamá|Panama City;Saint Kitts and Nevis|San Cristóbal y Nieves|Basseterre;Saint Lucia|Santa Lucía|Castries;Saint Vincent and the Grenadines|San Vicente y las Granadinas|Kingstown;Trinidad and Tobago|Trinidad y Tobago|Port of Spain;United States|Estados Unidos|Washington, D.C.",
+'South America':"Argentina|Argentina|Buenos Aires;Bolivia|Bolivia|Sucre;Brazil|Brasil|Brasília;Chile|Chile|Santiago;Colombia|Colombia|Bogotá;Ecuador|Ecuador|Quito;Guyana|Guyana|Georgetown;Paraguay|Paraguay|Asunción;Peru|Perú|Lima;Suriname|Surinam|Paramaribo;Uruguay|Uruguay|Montevideo;Venezuela|Venezuela|Caracas",
+Oceania:"Australia|Australia|Canberra;Fiji|Fiyi|Suva;Kiribati|Kiribati|Tarawa;Marshall Islands|Islas Marshall|Majuro;Micronesia|Micronesia|Palikir;Nauru|Nauru|Yaren;New Zealand|Nueva Zelanda|Wellington;Palau|Palaos|Ngerulmud;Papua New Guinea|Papúa Nueva Guinea|Port Moresby;Samoa|Samoa|Apia;Solomon Islands|Islas Salomón|Honiara;Tonga|Tonga|Nuku'alofa;Tuvalu|Tuvalu|Funafuti;Vanuatu|Vanuatu|Port Vila"};
+const D=[];for(const k in RAW)RAW[k].split(';').forEach(r=>{const a=r.split('|');D.push({n:a[0],s:a[1],c:a[2],k})});
+const $=s=>document.querySelector(s);
+const norm=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
+const pick=a=>a[Math.random()*a.length|0];
+const shuf=a=>a.map(x=>[Math.random(),x]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
+let slow=0,V=[],pts=0,cur='All',G=null;const heard=new Set();
+function toast(t){const e=$('#ts');e.textContent=t;e.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>e.hidden=true,3500)}
+const lv=()=>{V=speechSynthesis.getVoices().filter(v=>/^en[-_]US$/i.test(v.lang))};
+if('speechSynthesis' in window){lv();speechSynthesis.onvoiceschanged=lv}
+function say(t){if(!('speechSynthesis' in window)){toast('Tu navegador no tiene voz. Prueba con Chrome, Edge o Safari 🔊');return}
+speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=slow?.55:.85;if(V[0])u.voice=V[0];speechSynthesis.speak(u)}
+function boom(){for(let i=0;i<16;i++){const s=document.createElement('span');s.className='cf';s.textContent=pick(['🎉','⭐','✨','🌈','🎈']);s.style.left=Math.random()*95+'vw';s.style.animationDelay=Math.random()*.5+'s';document.body.appendChild(s);setTimeout(()=>s.remove(),2800)}}
+/* fondo animado */
+['✈️','🗺️','🌍','⭐','🎈','🌈','🧭','🚀','🌎','🏝️'].forEach(e=>{const s=document.createElement('span');s.className='fl';s.textContent=e;s.style.left=Math.random()*95+'vw';s.style.fontSize=1.5+Math.random()*2+'rem';s.style.animationDuration=12+Math.random()*14+'s';s.style.animationDelay=-Math.random()*20+'s';document.body.appendChild(s)});
+/* aprende */
+$('#conts').innerHTML=Object.keys(CO).map(k=>{const n=D.filter(d=>d.k===k).length,o=CO[k];return `<div class="card" style="--c:${o[2]}"><div style="font-size:2.4rem">${o[1]}</div><b>${k}</b><small>${o[0]}</small><div class="mut">${n?n+' países':'Sin países: ¡solo hielo y pingüinos! 🐧'}</div><button class="sp" data-say="${k}">🔊 Escuchar</button>${n?`<button class="sp" data-go="${k}">Ver países ➜</button>`:''}</div>`}).join('');
+/* explora */
+function hd(){$('#hd').textContent='🎧 Has escuchado '+heard.size+' de '+D.length+' países'}
+function ex(){const t=norm($('#q').value);
+$('#chips').innerHTML=['All',...Object.keys(CO)].map(k=>`<button class="chip${k===cur?' on':''}" data-f="${k}">${k==='All'?'🌐 All (Todos)':CO[k][1]+' '+k}</button>`).join('');
+const L=D.map((d,i)=>[d,i]).filter(x=>(cur==='All'||x[0].k===cur)&&(!t||norm(x[0].n+x[0].s+x[0].c).includes(t)));
+$('#list').innerHTML=L.length?L.map(x=>{const d=x[0];return `<div class="card" style="--c:${CO[d.k][2]}"><b>${d.n}</b><small>${d.s}</small><div>🏙️ ${d.c}</div><button class="sp" data-say="${d.n}" data-i="${x[1]}">🔊 País</button><button class="sp" data-say="${d.c}">🔊 Capital</button></div>`}).join(''):'<p>No hay países para mostrar aquí. 🔎</p>';hd()}
+$('#q').addEventListener('input',ex);
+function setTab(t){['learn','explore','games'].forEach(x=>$('#'+x).hidden=x!==t);document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));window.scrollTo({top:0,behavior:'smooth'})}
+/* juegos */
+$('#gf').innerHTML='<option value="All">🌐 Todo el mundo</option>'+Object.keys(CO).filter(k=>k!=='Antarctica').map(k=>`<option value="${k}">${CO[k][1]} ${k} (${CO[k][0]})</option>`).join('');
+const PR=[['Great job!','¡Buen trabajo!'],['Awesome!','¡Genial!'],['Well done!','¡Bien hecho!'],['Perfect!','¡Perfecto!'],['Super!','¡Súper!']];
+const RE=['Casi 🤏 ¡Inténtalo otra vez!','Uy, esa no 🙈 ¡Tú puedes!','¡Sigue intentando! 💪','Todavía no 🔍 ¡Prueba de nuevo!'];
+const opts4=(a,arr)=>shuf([a,...shuf([...new Set(arr)].filter(x=>x!==a)).slice(0,3)]);
+function start(m){G={m,f:$('#gf').value,ok:0,n:0};$('#hub').hidden=true;$('#ga').hidden=false;nextQ()}
+function quit(){if('speechSynthesis' in window)speechSynthesis.cancel();$('#ga').hidden=true;$('#hub').hidden=false}
+function fb(t,c){const e=$('#fb');e.className='fb '+c;e.innerHTML=t}
+function nextQ(){const P=D.filter(d=>G.m==='con'||G.f==='All'||d.k===G.f);let d;do{d=pick(P)}while(P.length>1&&G.d===d);
+G.d=d;G.t=0;G.done=0;G.n++;const m=G.m;let q,pre='',body='';G.opts=null;
+if(m==='cap'){q=`¿Cuál es la capital de <b>${d.s}</b>?`;G.ans=d.c;G.opts=opts4(d.c,D.map(x=>x.c))}
+else if(m==='lis'){q='Escucha con atención 👂 y elige el país que oíste:';G.ans=d.n;G.opts=opts4(d.n,D.map(x=>x.n));pre=`<button class="big" data-say="${d.n}">🔊 Escuchar otra vez</button>`;setTimeout(()=>say(d.n),350)}
+else if(m==='con'){q=`¿En qué continente está <b>${d.n}</b> <small>(${d.s})</small>?`;G.ans=d.k;G.opts=opts4(d.k,Object.keys(CO));pre=`<button class="mini" data-say="${d.n}">🔊 Escuchar el país</button>`}
+else if(m==='wc'){q=`Escribe en inglés el nombre de este país: <b>${d.s}</b>`;G.ans=d.n}
+else{q=`Escribe en inglés la capital de <b>${d.n}</b> <small>(${d.s})</small>`;G.ans=d.c;pre=`<button class="mini" data-say="${d.n}">🔊 Escuchar el país</button>`}
+if(G.opts)body='<div class="opts">'+G.opts.map((o,i)=>`<button class="op" data-o="${i}">${o}${m==='con'?`<small>${CO[o][0]}</small>`:''}</button>`).join('')+'</div>';
+else body='<input type="text" id="in" placeholder="✏️ Escribe aquí en inglés..." autocomplete="off" autocapitalize="off" spellcheck="false"><button class="big" id="ck">Comprobar ✅</button><button class="mini" id="sk">Saltar ⏭</button>';
+$('#ga').innerHTML=`<div class="bar"><span>Pregunta ${G.n}</span><span>✅ Aciertos: ${G.ok}</span><button class="mini" id="end">🏠 Salir</button></div><div class="q">${q}</div>${pre}${body}<div id="fb" class="fb"></div><button class="big" id="nx" hidden>Siguiente ➜</button>`;
+const i=$('#in');if(i){i.focus();i.addEventListener('keydown',e=>{if(e.key==='Enter')chk()})}}
+function win(){G.done=1;if(!G.t){G.ok++;pts++;const p=$('#pts');p.textContent='⭐ '+pts;p.classList.remove('bump');void p.offsetWidth;p.classList.add('bump')}
+const r=pick(PR);fb(`🎉 ¡Muy bien! <b>${r[0]}</b> (${r[1]})`,'ok');boom();say(G.ans+'. '+r[0]);
+document.querySelectorAll('#ga .op').forEach(x=>x.disabled=true);
+const i=$('#in');if(i){i.disabled=true;$('#ck').hidden=true;$('#sk').hidden=true}
+$('#nx').hidden=false;$('#nx').focus()}
+function pickOpt(b){if(G.done||b.disabled)return;
+if(G.opts[+b.dataset.o]===G.ans){b.classList.add('good');win()}else{b.classList.add('bad');b.disabled=true;G.t++;fb(pick(RE),'no')}}
+function chk(){if(G.done)return;const i=$('#in');if(!norm(i.value)){fb('Primero escribe tu respuesta ✏️','no');return}
+if(norm(i.value)===norm(G.ans))win();else{G.t++;fb(pick(RE),'no');i.classList.remove('shk');void i.offsetWidth;i.classList.add('shk');i.focus()}}
+document.addEventListener('click',e=>{const t=e.target;let b;
+if(b=t.closest('[data-say]')){say(b.dataset.say);if(b.dataset.i){heard.add(+b.dataset.i);hd()}}
+else if(b=t.closest('[data-t]'))setTab(b.dataset.t);
+else if(b=t.closest('[data-f]')){cur=b.dataset.f;ex()}
+else if(b=t.closest('[data-go]')){cur=b.dataset.go;ex();setTab('explore')}
+else if(b=t.closest('[data-g]'))start(b.dataset.g);
+else if(b=t.closest('.op'))pickOpt(b);
+else if(t.id==='ck')chk();
+else if(t.id==='sk'||t.id==='nx')nextQ();
+else if(t.id==='end')quit()});
+$('#spd').onclick=()=>{slow=slow?0:1;$('#spd').textContent='🐢 Voz lenta: '+(slow?'SÍ':'NO');say('Hello! Welcome!')};
+ex();
+</script></body></html>
